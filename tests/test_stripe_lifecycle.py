@@ -1,6 +1,7 @@
 import hashlib
 import hmac
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -9,6 +10,7 @@ sys.path.insert(0, str(ROOT / "provider_sandboxes"))
 
 from stripe_lifecycle import build_authorize_payload, summarize_payment_intent, summarize_refund
 from stripe_webhook_server import summarize_event, verify_signature
+from stripe_webhook_store import EventStore
 
 
 class StripeLifecycleTests(unittest.TestCase):
@@ -95,6 +97,31 @@ class StripeLifecycleTests(unittest.TestCase):
         summary = summarize_event(event)
         self.assertEqual(summary["event_type"], "payment_intent.succeeded")
         self.assertNotIn("client_secret", summary)
+
+    def test_event_store_claims_event_once(self):
+        with tempfile.TemporaryDirectory() as directory:
+            store = EventStore(str(Path(directory) / "events.db"))
+            summary = {
+                "event_id": "evt_once",
+                "event_type": "payment_intent.succeeded",
+                "object_id": "pi_test",
+            }
+            self.assertTrue(store.claim(summary, now=100))
+            self.assertFalse(store.claim(summary, now=101))
+
+    def test_event_store_marks_processed(self):
+        with tempfile.TemporaryDirectory() as directory:
+            store = EventStore(str(Path(directory) / "events.db"))
+            summary = {
+                "event_id": "evt_processed",
+                "event_type": "charge.refunded",
+                "object_id": "ch_test",
+            }
+            store.claim(summary, now=100)
+            store.mark_processed("evt_processed", now=110)
+            row = store.get("evt_processed")
+            self.assertEqual(row["processing_state"], "processed")
+            self.assertEqual(row["processed_at"], 110)
 
 
 if __name__ == "__main__":
