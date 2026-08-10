@@ -1,12 +1,25 @@
 # EU Payments Acceptance Engine
 
+[![tests](https://github.com/layan985/eu-payments-acceptance-engine/actions/workflows/tests.yml/badge.svg)](https://github.com/layan985/eu-payments-acceptance-engine/actions/workflows/tests.yml)
+
 A reproducible B2C payments analytics project for diagnosing authorization loss and testing routing changes across European markets.
 
-This repository is built around a practical payments question:
-
-> When authorization differs across PSPs, markets, devices and authentication paths, how do you decide what to change without mistaking correlation for causal uplift?
+> **Question:** when authorization differs across PSPs, markets, devices and authentication paths, how do you decide what to change without mistaking correlation for causal uplift?
 
 The project generates a 300,000-transaction synthetic merchant dataset, produces payment-performance diagnostics, and runs a randomized routing experiment with commercial guardrails.
+
+## Reproduced headline results
+
+| Metric | Seeded result |
+|---|---:|
+| Overall authorization rate | 93.10% |
+| Germany / PSP_A | 93.03% |
+| Germany / PSP_B | 89.31% |
+| Raw Germany PSP gap | 372 bps |
+| Randomized treatment-control gap | ~248 bps |
+| 95% CI on randomized gap | ~191–305 bps |
+
+The 372 bp observational gap is **not** described as uplift. It identifies where to investigate. The randomized experiment demonstrates how a routing change should be evaluated.
 
 ## What it demonstrates
 
@@ -14,16 +27,10 @@ The project generates a 300,000-transaction synthetic merchant dataset, produces
 - PSP × market performance segmentation
 - 3DS / device diagnostics
 - soft vs hard decline taxonomy
-- routing experiment design
+- routing experiment design with confidence intervals
 - SQL analysis
 - reproducible synthetic data generation
 - commercial decision-making with fraud, dispute, latency and cost guardrails
-
-## Results from the seeded dataset
-
-The synthetic data deliberately includes a Germany × PSP_B acceptance penalty so the analysis has a real diagnostic target. The report quantifies the raw gap and then refuses to treat it as causal: the recommended action is a randomized routing test.
-
-That distinction is intentional. Payments teams should not reroute production traffic because a dashboard shows one PSP with a higher raw authorization rate.
 
 ## Architecture
 
@@ -64,7 +71,13 @@ No external Python packages are required.
 - `decision_memo.md` — business recommendation and rollout guardrails
 - `METHODS.md` — assumptions and claim boundaries
 - `DATA_DICTIONARY.md` — transaction schema
+- `RESULTS.md` — concise reproduced findings
 - `tests/` — reproducibility and logic checks
+
+## Related payments projects
+
+- [SEPA Instant + Verification of Payee Simulator](https://github.com/layan985/sepa-instant-vop-simulator)
+- [Payments Reconciliation Engine](https://github.com/layan985/payments-reconciliation-engine)
 
 ## Portfolio claim boundary
 
