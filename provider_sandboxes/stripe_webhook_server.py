@@ -5,7 +5,10 @@ import os
 import time
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
+from stripe_webhook_store import EventStore
+
 DEFAULT_TOLERANCE_SECONDS = 300
+DEFAULT_EVENT_DB = "stripe_webhook_events.db"
 
 
 def parse_signature_header(header):
@@ -54,18 +57,25 @@ def summarize_event(event):
     }
 
 
+def event_store():
+    return EventStore(os.getenv("STRIPE_WEBHOOK_DB", DEFAULT_EVENT_DB))
+
+
 class StripeWebhookHandler(BaseHTTPRequestHandler):
+    def _json_response(self, status, body):
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json")
+        self.end_headers()
+        self.wfile.write(json.dumps(body).encode())
+
     def do_POST(self):
         if self.path != "/webhook":
-            self.send_response(404)
-            self.end_headers()
+            self._json_response(404, {"error": "not_found"})
             return
 
         endpoint_secret = os.getenv("STRIPE_WEBHOOK_SECRET")
         if not endpoint_secret:
-            self.send_response(500)
-            self.end_headers()
-            self.wfile.write(b"STRIPE_WEBHOOK_SECRET is not configured")
+            self._json_response(500, {"error": "webhook_secret_not_configured"})
             return
 
         length = int(self.headers.get("Content-Length", "0"))
@@ -73,24 +83,38 @@ class StripeWebhookHandler(BaseHTTPRequestHandler):
         signature = self.headers.get("Stripe-Signature", "")
 
         if not verify_signature(payload, signature, endpoint_secret):
-            self.send_response(400)
-            self.end_headers()
-            self.wfile.write(b"invalid signature")
+            self._json_response(400, {"error": "invalid_signature"})
             return
 
         try:
             event = json.loads(payload)
         except json.JSONDecodeError:
-            self.send_response(400)
-            self.end_headers()
-            self.wfile.write(b"invalid json")
+            self._json_response(400, {"error": "invalid_json"})
             return
 
-        print(json.dumps(summarize_event(event), indent=2))
-        self.send_response(200)
-        self.send_header("Content-Type", "application/json")
-        self.end_headers()
-        self.wfile.write(b'{"received":true}')
+        summary = summarize_event(event)
+        if not summary.get("event_id") or not summary.get("event_type"):
+            self._json_response(400, {"error": "invalid_event"})
+            return
+
+        store = event_store()
+        claimed = store.claim(summary)
+        if not claimed:
+            duplicate_summary = dict(summary)
+            duplicate_summary["duplicate"] = True
+            print(json.dumps(duplicate_summary, indent=2))
+            self._json_response(200, {"received": True, "duplicate": True})
+            return
+
+        try:
+            print(json.dumps(summary, indent=2))
+            store.mark_processed(summary["event_id"])
+        except Exception:
+            store.mark_failed(summary["event_id"])
+            self._json_response(500, {"received": False})
+            return
+
+        self._json_response(200, {"received": True, "duplicate": False})
 
     def log_message(self, format, *args):
         return
@@ -100,6 +124,7 @@ def run(port=4242):
     if not os.getenv("STRIPE_WEBHOOK_SECRET"):
         raise SystemExit("Set STRIPE_WEBHOOK_SECRET to the Stripe test webhook signing secret (whsec_...).")
     print(f"Stripe webhook listener: http://localhost:{port}/webhook")
+    print(f"Idempotency ledger: {os.getenv('STRIPE_WEBHOOK_DB', DEFAULT_EVENT_DB)}")
     HTTPServer(("127.0.0.1", port), StripeWebhookHandler).serve_forever()
 
 
