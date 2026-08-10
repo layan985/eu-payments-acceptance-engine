@@ -6,7 +6,13 @@ A reproducible B2C payments analytics project for diagnosing authorization loss 
 
 > **Question:** when authorization differs across PSPs, markets, devices and authentication paths, how do you decide what to change without mistaking correlation for causal uplift?
 
-The project generates a 300,000-transaction synthetic merchant dataset, produces payment-performance diagnostics, and runs a randomized routing experiment with commercial guardrails.
+The project combines **official ECB market context** with a reproducible 300,000-transaction synthetic merchant environment. The real-data layer anchors the project to the European payments market; the synthetic layer makes transaction-level routing and acceptance experiments reproducible without claiming access to private merchant data.
+
+## Real European market context
+
+`ecb_market_snapshot.py` pulls the latest observations for official ECB card-payment series. `ECB_MARKET_CONTEXT.md` records the H1 2025 baseline, including 44.0 billion euro-area card payments, an average card-payment value around €38.40, and 29.6 billion contactless card payments.
+
+These aggregates are kept separate from the synthetic authorization model so market evidence is not confused with simulated transaction outcomes.
 
 ## Reproduced headline results
 
@@ -29,6 +35,7 @@ The 372 bp observational gap is **not** described as uplift. It identifies where
 - soft vs hard decline taxonomy
 - routing experiment design with confidence intervals
 - SQL analysis
+- official ECB payment-statistics integration
 - reproducible synthetic data generation
 - commercial decision-making with fraud, dispute, latency and cost guardrails
 
@@ -60,10 +67,18 @@ python experiment.py
 python -m unittest discover -s tests -v
 ```
 
+Optional live ECB snapshot:
+
+```bash
+python ecb_market_snapshot.py
+```
+
 No external Python packages are required.
 
 ## Repository structure
 
+- `ecb_market_snapshot.py` — live ECB Data Portal market snapshot
+- `ECB_MARKET_CONTEXT.md` — official euro-area payments baseline and series keys
 - `generate_data.py` — deterministic synthetic payment generator
 - `analyze.py` — authorization, decline and market/PSP diagnostics
 - `experiment.py` — randomized routing experiment
@@ -81,4 +96,4 @@ No external Python packages are required.
 
 ## Portfolio claim boundary
 
-This is a synthetic research/portfolio environment, not production merchant data. It demonstrates payments reasoning, engineering and experimentation; it does not claim real merchant revenue uplift.
+The ECB market layer is real public data; the transaction-level merchant environment is synthetic. The project demonstrates payments reasoning, engineering and experimentation; it does not claim production merchant access or real merchant revenue uplift.
