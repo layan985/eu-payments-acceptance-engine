@@ -17,6 +17,12 @@ python provider_sandboxes/stripe_sandbox.py 3ds_required
 
 The 3DS-required scenario is expected to demonstrate an authentication state rather than a frictionless final success.
 
+### Executed evidence
+
+The Stripe path was executed against Stripe's test API on 2026-08-10 using a developer-owned test secret key. A deliberately insufficient-funds payment produced a card-error response, and the 3DS-required flow reached `requires_action` with a Visa 3DS2 fingerprint path.
+
+See `evidence/stripe_2026-08-10.md` for the redacted record. No secret key, client secret, account identifier, customer data or raw certificate material is stored.
+
 ## Adyen
 
 `adyen_sandbox.py` calls the Adyen Checkout test `/payments` endpoint using the documented `test_`-prefixed encrypted test-card fields.
