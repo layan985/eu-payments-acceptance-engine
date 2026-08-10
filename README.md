@@ -38,7 +38,9 @@ The 372 bp observational gap is **not** described as uplift. It identifies where
 - Stripe PaymentIntents: successful authorization, generic decline, insufficient funds and 3DS-required scenarios;
 - Adyen Checkout `/payments`: server-side card testing with Adyen's documented `test_`-prefixed encrypted test-card fields.
 
-Secrets are read only from local environment variables and are never committed. Offline contract tests validate request construction in CI; live sandbox calls require the developer's own test credentials.
+The Stripe path has now been exercised against Stripe's real test API with developer-owned test credentials. Redacted retained evidence includes an insufficient-funds card-error response and a 3DS flow reaching `requires_action`; see `provider_sandboxes/evidence/stripe_2026-08-10.md`.
+
+Secrets are read only from local environment variables and are never committed. Offline contract tests validate request construction in CI. Adyen still requires a developer-owned test-account execution before provider evidence is claimed for that path.
 
 ## What it demonstrates
 
@@ -47,7 +49,8 @@ Secrets are read only from local environment variables and are never committed. 
 - 3DS / SCA diagnostics
 - smart-routing experiment design with confidence intervals
 - fraud, dispute, latency and cost guardrails
-- Stripe and Adyen sandbox integration design
+- executed Stripe test-environment PaymentIntent flows
+- Adyen sandbox integration design
 - idempotency-aware provider requests
 - SQL analysis
 - official ECB payments-statistics integration
@@ -104,4 +107,4 @@ Stars are not counted as validation.
 
 ## Claim boundary
 
-The ECB market layer is real public data. Stripe/Adyen scripts target real PSP test environments but require the developer's own sandbox credentials before any live test evidence exists. The transaction-level merchant environment is synthetic. This project does not claim production merchant access or real merchant revenue uplift.
+The ECB market layer is real public data. The Stripe integration has been exercised against Stripe's test API and redacted evidence is retained in the repository. The Adyen script targets Adyen's real test environment but still requires developer-owned test-account execution before live sandbox evidence is claimed for that provider. The transaction-level merchant environment is synthetic. This project does not claim production merchant access, live-money processing, certification, or real merchant revenue uplift.
