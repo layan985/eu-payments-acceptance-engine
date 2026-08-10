@@ -10,7 +10,7 @@ The project combines three layers:
 
 1. **official ECB market data** for the real European payments baseline;
 2. a reproducible **300,000-transaction synthetic merchant environment** for transaction-level experiments;
-3. credential-gated **Stripe and Adyen sandbox paths** for real PSP test-environment verification.
+3. credential-gated PSP test-environment paths, with Stripe executed against the real Stripe test API.
 
 ## Current European market context
 
@@ -31,16 +31,17 @@ See `ECB_MARKET_CONTEXT.md` and `ecb_market_snapshot.py`.
 
 The 372 bp observational gap is **not** described as uplift. It identifies where to investigate. The randomized experiment demonstrates how a routing change should be evaluated.
 
-## PSP sandbox verification
+## Stripe test-environment verification
 
-`provider_sandboxes/` contains test-environment integrations for:
+The Stripe path has been exercised against Stripe's real test API using developer-owned test credentials. The retained redacted evidence covers successful authorization, deliberate card declines, and a 3DS flow reaching `requires_action`; see `provider_sandboxes/evidence/stripe_2026-08-10.md`.
 
-- Stripe PaymentIntents: successful authorization, generic decline, insufficient funds and 3DS-required scenarios;
-- Adyen Checkout `/payments`: server-side card testing with Adyen's documented `test_`-prefixed encrypted test-card fields.
+The Stripe integration now contains three layers:
 
-The Stripe path has now been exercised against Stripe's real test API with developer-owned test credentials. Redacted retained evidence includes an insufficient-funds card-error response and a 3DS flow reaching `requires_action`; see `provider_sandboxes/evidence/stripe_2026-08-10.md`.
+- `stripe_sandbox.py` — PaymentIntent success, generic decline, insufficient-funds, and 3DS-required scenarios;
+- `stripe_lifecycle.py` — separate authorization and capture followed by a full refund (`requires_capture` → `succeeded` → refund);
+- `stripe_webhook_server.py` — local webhook endpoint that verifies the raw-body `Stripe-Signature` HMAC and enforces a five-minute replay tolerance before accepting an event.
 
-Secrets are read only from local environment variables and are never committed. Offline contract tests validate request construction in CI. Adyen still requires a developer-owned test-account execution before provider evidence is claimed for that path.
+Secrets are read only from local environment variables and are never committed. CI tests request construction, evidence redaction, manual-capture payloads, webhook signature verification, tamper rejection, and replay rejection. Network calls remain credential-gated and are not faked in CI.
 
 ## What it demonstrates
 
@@ -50,7 +51,9 @@ Secrets are read only from local environment variables and are never committed. 
 - smart-routing experiment design with confidence intervals
 - fraud, dispute, latency and cost guardrails
 - executed Stripe test-environment PaymentIntent flows
-- Adyen sandbox integration design
+- separate authorization and capture lifecycle design
+- refund handling
+- webhook signature verification and replay protection
 - idempotency-aware provider requests
 - SQL analysis
 - official ECB payments-statistics integration
@@ -62,17 +65,18 @@ Secrets are read only from local environment variables and are never committed. 
 flowchart LR
     A[Customer checkout] --> B[Merchant payment layer]
     B --> C{Routing decision}
-    C --> D[PSP A / Stripe test]
-    C --> E[PSP B / Adyen test]
-    C --> F[Other PSP]
-    D --> G[Acquirer / scheme / issuer]
-    E --> G
-    F --> G
-    G --> H{Authorization}
-    H -->|approved| I[Capture / fulfillment]
-    H -->|declined| J[Decline taxonomy]
-    I --> K[Settlement / reconciliation]
-    J --> L[Retry / authentication / routing analysis]
+    C --> D[Stripe test API]
+    C --> E[Other PSP]
+    D --> F[Acquirer / scheme / issuer]
+    E --> F
+    F --> G{Authorization}
+    G -->|requires capture| H[Capture]
+    G -->|declined| I[Decline taxonomy]
+    G -->|requires action| J[3DS authentication]
+    H --> K[Refund / settlement / reconciliation]
+    I --> L[Retry / routing analysis]
+    D --> M[Signed webhook events]
+    M --> N[Signature + replay verification]
 ```
 
 ## Run
@@ -90,7 +94,26 @@ Optional real-data pull:
 python ecb_market_snapshot.py
 ```
 
-Optional PSP sandbox calls require your own test credentials; see `provider_sandboxes/README.md`.
+Stripe test scenarios require `STRIPE_TEST_SECRET_KEY`:
+
+```bash
+python provider_sandboxes/stripe_sandbox.py success
+python provider_sandboxes/stripe_sandbox.py generic_decline
+python provider_sandboxes/stripe_sandbox.py insufficient_funds
+python provider_sandboxes/stripe_sandbox.py 3ds_required
+```
+
+Run the full authorization → capture → refund test lifecycle:
+
+```bash
+python provider_sandboxes/stripe_lifecycle.py
+```
+
+The local webhook verifier requires `STRIPE_WEBHOOK_SECRET` and listens on `http://localhost:4242/webhook`:
+
+```bash
+python provider_sandboxes/stripe_webhook_server.py
+```
 
 ## External validation
 
@@ -107,4 +130,4 @@ Stars are not counted as validation.
 
 ## Claim boundary
 
-The ECB market layer is real public data. The Stripe integration has been exercised against Stripe's test API and redacted evidence is retained in the repository. The Adyen script targets Adyen's real test environment but still requires developer-owned test-account execution before live sandbox evidence is claimed for that provider. The transaction-level merchant environment is synthetic. This project does not claim production merchant access, live-money processing, certification, or real merchant revenue uplift.
+The ECB market layer is real public data. The Stripe PaymentIntent scenarios have been exercised against Stripe's test API and redacted evidence is retained in the repository. The new authorization/capture/refund lifecycle and webhook receiver are implemented and contract-tested; they should only be described as executed provider evidence after their own credential-gated runs are retained. The transaction-level merchant environment is synthetic. This project does not claim production merchant access, live-money processing, certification, or real merchant revenue uplift.
