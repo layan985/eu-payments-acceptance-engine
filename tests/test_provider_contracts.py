@@ -64,12 +64,17 @@ class ProviderContractTests(unittest.TestCase):
         self.assertEqual(summary['decline_code'], 'insufficient_funds')
         self.assertNotIn('request_log_url', summary)
 
-    def test_adyen_test_payload(self):
-        payload = adyen_payload('TEST_MERCHANT', reference='portfolio-test')
+    def test_adyen_success_payload(self):
+        payload = adyen_payload('TEST_MERCHANT', scenario='success', reference='portfolio-test')
         self.assertEqual(payload['amount']['currency'], 'EUR')
         self.assertEqual(payload['countryCode'], 'DE')
         self.assertTrue(payload['paymentMethod']['encryptedCardNumber'].startswith('test_'))
         self.assertEqual(payload['reference'], 'portfolio-test')
+        self.assertEqual(payload['additionalData']['RequestedTestAcquirerResponseCode'], '1')
+
+    def test_adyen_insufficient_funds_payload(self):
+        payload = adyen_payload('TEST_MERCHANT', scenario='insufficient_funds')
+        self.assertEqual(payload['additionalData']['RequestedTestAcquirerResponseCode'], '12')
 
     def test_adyen_response_summary_excludes_raw_action(self):
         data = {
@@ -79,7 +84,8 @@ class ProviderContractTests(unittest.TestCase):
             'amount': {'currency': 'EUR', 'value': 1299},
             'action': {'type': 'redirect', 'url': 'https://secret-ish.example'},
         }
-        summary = adyen_response_summary(data)
+        summary = adyen_response_summary(data, 'authentication_required')
+        self.assertEqual(summary['scenario'], 'authentication_required')
         self.assertEqual(summary['action_type'], 'redirect')
         self.assertNotIn('action', summary)
 
