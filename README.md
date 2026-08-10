@@ -2,19 +2,23 @@
 
 [![tests](https://github.com/layan985/eu-payments-acceptance-engine/actions/workflows/tests.yml/badge.svg)](https://github.com/layan985/eu-payments-acceptance-engine/actions/workflows/tests.yml)
 
-A reproducible B2C payments analytics project for diagnosing authorization loss and testing routing changes across European markets.
+A B2C payments analytics and integration project for diagnosing authorization loss, testing routing changes, and validating assumptions against the real European payments market.
 
 > **Question:** when authorization differs across PSPs, markets, devices and authentication paths, how do you decide what to change without mistaking correlation for causal uplift?
 
-The project combines **official ECB market context** with a reproducible 300,000-transaction synthetic merchant environment. The real-data layer anchors the project to the European payments market; the synthetic layer makes transaction-level routing and acceptance experiments reproducible without claiming access to private merchant data.
+The project combines three layers:
 
-## Real European market context
+1. **official ECB market data** for the real European payments baseline;
+2. a reproducible **300,000-transaction synthetic merchant environment** for transaction-level experiments;
+3. credential-gated **Stripe and Adyen sandbox paths** for real PSP test-environment verification.
 
-`ecb_market_snapshot.py` pulls the latest observations for official ECB card-payment series. `ECB_MARKET_CONTEXT.md` records the H1 2025 baseline, including 44.0 billion euro-area card payments, an average card-payment value around €38.40, and 29.6 billion contactless card payments.
+## Current European market context
 
-These aggregates are kept separate from the synthetic authorization model so market evidence is not confused with simulated transaction outcomes.
+The latest ECB release, for H2 2025, reports **83.5 billion** euro-area non-cash payments, cards at about **57%** of payment count, and **32.9 billion** contactless card payments. The joint EBA-ECB fraud report puts the 2024 EEA fraud rate at around **0.002% of transaction value** and finds SCA remains effective against the fraud types it was designed to mitigate.
 
-## Reproduced headline results
+See `ECB_MARKET_CONTEXT.md` and `ecb_market_snapshot.py`.
+
+## Reproduced experiment results
 
 | Metric | Seeded result |
 |---|---:|
@@ -27,17 +31,27 @@ These aggregates are kept separate from the synthetic authorization model so mar
 
 The 372 bp observational gap is **not** described as uplift. It identifies where to investigate. The randomized experiment demonstrates how a routing change should be evaluated.
 
+## PSP sandbox verification
+
+`provider_sandboxes/` contains test-environment integrations for:
+
+- Stripe PaymentIntents: successful authorization, generic decline, insufficient funds and 3DS-required scenarios;
+- Adyen Checkout `/payments`: server-side card testing with Adyen's documented `test_`-prefixed encrypted test-card fields.
+
+Secrets are read only from local environment variables and are never committed. Offline contract tests validate request construction in CI; live sandbox calls require the developer's own test credentials.
+
 ## What it demonstrates
 
-- payment authorization and decline analytics
+- B2C payment acceptance and decline analytics
 - PSP × market performance segmentation
-- 3DS / device diagnostics
-- soft vs hard decline taxonomy
-- routing experiment design with confidence intervals
+- 3DS / SCA diagnostics
+- smart-routing experiment design with confidence intervals
+- fraud, dispute, latency and cost guardrails
+- Stripe and Adyen sandbox integration design
+- idempotency-aware provider requests
 - SQL analysis
-- official ECB payment-statistics integration
-- reproducible synthetic data generation
-- commercial decision-making with fraud, dispute, latency and cost guardrails
+- official ECB payments-statistics integration
+- clear separation of public, simulated and sandbox evidence
 
 ## Architecture
 
@@ -45,9 +59,9 @@ The 372 bp observational gap is **not** described as uplift. It identifies where
 flowchart LR
     A[Customer checkout] --> B[Merchant payment layer]
     B --> C{Routing decision}
-    C --> D[PSP A]
-    C --> E[PSP B]
-    C --> F[PSP C]
+    C --> D[PSP A / Stripe test]
+    C --> E[PSP B / Adyen test]
+    C --> F[Other PSP]
     D --> G[Acquirer / scheme / issuer]
     E --> G
     F --> G
@@ -67,33 +81,27 @@ python experiment.py
 python -m unittest discover -s tests -v
 ```
 
-Optional live ECB snapshot:
+Optional real-data pull:
 
 ```bash
 python ecb_market_snapshot.py
 ```
 
-No external Python packages are required.
+Optional PSP sandbox calls require your own test credentials; see `provider_sandboxes/README.md`.
 
-## Repository structure
+## External validation
 
-- `ecb_market_snapshot.py` — live ECB Data Portal market snapshot
-- `ECB_MARKET_CONTEXT.md` — official euro-area payments baseline and series keys
-- `generate_data.py` — deterministic synthetic payment generator
-- `analyze.py` — authorization, decline and market/PSP diagnostics
-- `experiment.py` — randomized routing experiment
-- `sql/acceptance_diagnostics.sql` — analyst-style SQL queries
-- `decision_memo.md` — business recommendation and rollout guardrails
-- `METHODS.md` — assumptions and claim boundaries
-- `DATA_DICTIONARY.md` — transaction schema
-- `RESULTS.md` — concise reproduced findings
-- `tests/` — reproducibility and logic checks
+- `EXTERNAL_REVIEW.md` contains a five-question review packet for payments professionals.
+- `ADOPTION.md` records independent reproduction, external review, usage and contributions.
+- GitHub issue #1 is open specifically for external challenge of routing, 3DS and PSP assumptions.
+
+Stars are not counted as validation.
 
 ## Related payments projects
 
 - [SEPA Instant + Verification of Payee Simulator](https://github.com/layan985/sepa-instant-vop-simulator)
 - [Payments Reconciliation Engine](https://github.com/layan985/payments-reconciliation-engine)
 
-## Portfolio claim boundary
+## Claim boundary
 
-The ECB market layer is real public data; the transaction-level merchant environment is synthetic. The project demonstrates payments reasoning, engineering and experimentation; it does not claim production merchant access or real merchant revenue uplift.
+The ECB market layer is real public data. Stripe/Adyen scripts target real PSP test environments but require the developer's own sandbox credentials before any live test evidence exists. The transaction-level merchant environment is synthetic. This project does not claim production merchant access or real merchant revenue uplift.
