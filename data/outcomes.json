@@ -1,0 +1,8 @@
+{
+  "schema_version":"1.0",
+  "canonical":true,
+  "last_updated":"2026-08-16",
+  "records":[],
+  "required_fields":["audit_id","metric","baseline_window","baseline_value","intervention","measurement_window","observed_value","absolute_change","relative_change","causal_design","guardrails","economic_value_method","evidence_class","limitations","client_acceptance","public_permission"],
+  "rule":"Modeled opportunity, observed movement and causally attributable uplift are different objects. Realized value is not published without the underlying measurement window, intervention record and permission."
+}
