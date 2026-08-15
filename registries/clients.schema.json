@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Payment Performance Lab Client Registry",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["client_id", "legal_name", "public_alias", "industry", "country", "status"],
+    "properties": {
+      "client_id": {"type": "string", "pattern": "^PP-CL-[0-9]{3}$"},
+      "legal_name": {"type": "string"},
+      "public_alias": {"type": "string"},
+      "industry": {"type": "string"},
+      "country": {"type": "string"},
+      "contract_date": {"type": ["string", "null"], "format": "date"},
+      "payment_volume": {"type": ["number", "null"]},
+      "attempt_volume": {"type": ["integer", "null"]},
+      "data_period": {"type": ["string", "null"]},
+      "permissions": {
+        "type": "object",
+        "properties": {
+          "data": {"type": "boolean"},
+          "publication": {"type": "boolean"},
+          "testimonial": {"type": "boolean"},
+          "case_study": {"type": "boolean"},
+          "metric_disclosure": {"type": "boolean"}
+        },
+        "additionalProperties": false
+      },
+      "invoice_status": {"type": ["string", "null"]},
+      "implementation_status": {"type": ["string", "null"]},
+      "outcome_validation": {"type": ["string", "null"]},
+      "status": {"type": "string"}
+    },
+    "additionalProperties": false
+  }
+}

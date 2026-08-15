@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Payment Performance Lab Engagement Registry",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["engagement_id", "client_id", "audit_type", "status"],
+    "properties": {
+      "engagement_id": {"type": "string", "pattern": "^PP-ENG-[0-9]{3}$"},
+      "client_id": {"type": "string", "pattern": "^PP-CL-[0-9]{3}$"},
+      "audit_type": {"type": "string"},
+      "start": {"type": ["string", "null"], "format": "date"},
+      "end": {"type": ["string", "null"], "format": "date"},
+      "lead": {"type": ["string", "null"]},
+      "data_received": {"type": "boolean"},
+      "analysis_version": {"type": ["string", "null"]},
+      "findings": {"type": "array", "items": {"type": "string"}},
+      "recommendations": {"type": "array", "items": {"type": "string"}},
+      "implementation": {"type": ["string", "null"]},
+      "validation": {"type": ["string", "null"]},
+      "publication_rights": {"type": ["string", "null"]},
+      "status": {"type": "string"}
+    },
+    "additionalProperties": false
+  }
+}
