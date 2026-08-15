@@ -1,0 +1,9 @@
+{
+  "schema_version":"1.0",
+  "canonical":true,
+  "last_updated":"2026-08-16",
+  "records":[],
+  "required_fields":["audit_id","finding_id","decision","owner","change","system_surface","start_date","end_date","experiment_id","rollout_fraction","guardrails","rollback_condition","status","verification_record"],
+  "decision_values":["FIX","INVESTIGATE","TEST","DO_NOT_TOUCH"],
+  "rule":"A recommendation does not become an implementation or outcome merely because it appears in an audit. Production changes require an attributable implementation record."
+}
