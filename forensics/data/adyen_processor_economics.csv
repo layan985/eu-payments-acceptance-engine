@@ -1,0 +1,4 @@
+period,net_revenue_eur_bn,processed_volume_eur_bn,pos_volume_eur_bn,ebitda_eur_bn,ebitda_margin_pct,derived_net_revenue_to_volume_bps,derived_pos_share_pct,evidence_type,source_org,source_date,source_url,limitations
+Q1_2026,0.6208,382.0,,, ,16.25,,OFFICIAL_SOURCE,Adyen,2026-05-06,https://investors.adyen.com/financials,"Company-level financial aggregates; revenue/volume ratio is not merchant MDR, interchange, scheme fee or quoted price"
+H2_2025,1.2707,745.3,173.1,0.7021,55,17.05,23.23,OFFICIAL_SOURCE,Adyen,2026-02-12,https://investors.adyen.com/financials,"Company-level financial aggregates; ratio is an analytical proxy only"
+FY_2025,2.3642,1394.3,311.0,,53,16.96,22.31,OFFICIAL_SOURCE,Adyen,2026-02-12,https://investors.adyen.com/financials,"Company-level financial aggregates; ratio is an analytical proxy only"
