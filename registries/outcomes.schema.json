@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Payment Performance Lab Outcome Registry",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["outcome_id", "engagement_id", "metric", "evidence_class", "value_tier"],
+    "properties": {
+      "outcome_id": {"type": "string", "pattern": "^OUT-[0-9]{3}$"},
+      "engagement_id": {"type": "string", "pattern": "^PP-ENG-[0-9]{3}$"},
+      "intervention": {"type": "string"},
+      "metric": {"type": "string"},
+      "baseline": {"type": ["number", "null"]},
+      "treatment": {"type": ["number", "null"]},
+      "effect_bps": {"type": ["number", "null"]},
+      "confidence_interval_bps": {"type": ["array", "null"], "items": {"type": "number"}, "minItems": 2, "maxItems": 2},
+      "experiment_design": {"type": ["string", "null"]},
+      "n": {"type": ["integer", "null"]},
+      "window": {"type": ["string", "null"]},
+      "fraud_guardrail": {"type": ["string", "null"]},
+      "cost_guardrail": {"type": ["string", "null"]},
+      "implementation_status": {"type": ["string", "null"]},
+      "annualization_method": {"type": ["string", "null"]},
+      "evidence_class": {"enum": ["OFFICIAL SOURCE", "REAL PUBLIC DATA", "PROVIDER TEST", "SYNTHETIC", "RANDOMIZED SYNTHETIC", "PRODUCTION CLIENT DATA", "EXTERNAL REVIEW", "INDEPENDENT REPRODUCTION", "PENDING VALIDATION"]},
+      "value_tier": {"enum": ["LOSS OBSERVED", "OPPORTUNITY ESTIMATED", "EXPERIMENT VALIDATED", "IMPLEMENTED", "FINANCIALLY REALIZED"]},
+      "limitations": {"type": "array", "items": {"type": "string"}}
+    },
+    "additionalProperties": false
+  }
+}
