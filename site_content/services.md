@@ -1,0 +1,110 @@
+# Checkout Leak Audit · €1,950
+
+<div class="meta-line"><span>FOUNDING PRODUCTION OFFER</span><span>50% UPFRONT</span><span>FIXED SCOPE</span></div>
+
+<div class="price-card"><b>€1,950</b><span>€975 upfront · €975 on delivery</span><small>no percentage-of-uplift fee</small></div>
+
+A Head of Payments should be able to decide whether this is relevant without booking a discovery call. The scope is fixed after the decision question and data perimeter are confirmed.
+
+## Inputs
+
+| Input | Minimum useful fields | Default security boundary |
+|---|---|---|
+| payment attempts / intents | stable IDs, timestamp, amount, market, method, route, result | no PAN/CVV/card-track |
+| authentication | 3DS state, exemption/flow where available, result | no authentication secrets |
+| declines | normalized reason/code, soft/hard classification | sensitive provider/issuer text minimized |
+| lifecycle | authorization, capture, refund, reversal/dispute states + timestamps | non-sensitive provider object IDs |
+| economics / reconciliation | provider fees, payout/settlement identifiers where in scope | only fields needed for agreed decision |
+
+Default intake excludes full PAN, CVV/CVC, card-track data, authentication secrets, private keys, passwords and unnecessary directly identifying customer data. Preferred identifiers are merchant-generated non-sensitive IDs, provider object IDs and pseudonymized references.
+
+**Security standard:** [Data Security & Client Confidentiality](https://github.com/layan985/eu-payments-acceptance-engine/blob/main/institution/SECURITY_CONFIDENTIALITY.md)
+
+## Analysis stages
+
+### 01 · Perimeter + measurement contract
+
+Lock the decision question, payment objects, eligibility rule, denominator, time window and exclusions before analysis starts.
+
+### 02 · Data QA + state integrity
+
+Check identifiers, duplicates, missing states, impossible transitions, timestamp/order consistency and reconciliation perimeter. A broken event model is fixed before performance is optimized.
+
+### 03 · Loss decomposition
+
+Authorization and failed-value maps by market, method, device, route, issuer/BIN attributes where lawful, authentication state and decline class.
+
+### 04 · Retry + authentication
+
+Separate attempt, intent and economic denominators; isolate retry contamination and selected authentication populations.
+
+### 05 · Routing + economics
+
+Screen route differences; refuse causal wording until assignment/identification is defensible; join fraud, dispute, latency and processing-cost guardrails where available.
+
+### 06 · Decision memo
+
+Every issue ends in one state: **FIX · INVESTIGATE · TEST · DO NOT TOUCH**, with evidence, limitation and next action.
+
+## Exact deliverables
+
+### Measurement + QA
+
+- Payment Data QA report
+- metric dictionary
+- object/state map
+- provenance/transformation notes
+- limitations register
+
+### Payment forensics
+
+- failed-value waterfall
+- authorization map
+- decline forensics
+- 3DS diagnostic
+- retry analysis
+- routing screen where identifiable
+- payment-state / reconciliation exceptions
+
+### Decision layer
+
+- experiment designs
+- primary outcome + guardrails
+- executive decision memo
+- technical appendix
+- FIX / INVESTIGATE / TEST / DO NOT TOUCH register
+
+## Sample output preview
+
+<div class="decision-cards">
+<div><span>INVESTIGATE</span><b>Observed route gap</b><strong>372 bps</strong><p>Do not annualize. Check mix, eligibility and assignment first.</p></div>
+<div><span>TEST</span><b>Identified intervention</b><strong>pre-specified</strong><p>Randomize eligible traffic; monitor authorization + fraud + dispute + latency + cost.</p></div>
+<div><span>DO NOT TOUCH</span><b>Hard decline repeat</b><strong>blocked</strong><p>No blind recovery loop for hard/sensitive failure classes.</p></div>
+</div>
+
+## What happens during the engagement
+
+**Start:** written scope + permitted-use/data perimeter.  
+**Analysis:** work proceeds against the locked measurement contract; missing evidence is marked unresolved rather than guessed.  
+**Delivery:** one decision pack plus reproducible analytical outputs.  
+**Close:** agreed retention/deletion expectations are followed. Any public case record requires separate explicit permission.
+
+## What Checkout refuses to claim
+
+- an observed processor difference is not called causal uplift;
+- gross authorization movement is not called realized revenue;
+- sandbox execution is not provider, scheme or PCI certification;
+- fraud reduction is not inferred from approval data;
+- no client identity, production metric or result is published without explicit permission.
+
+## Suitable
+
+Multi-market ecommerce, travel, subscription and digital businesses with stable payment identifiers and enough history to inspect acceptance and state behavior.
+
+## Not suitable
+
+Generic CRO design, PCI certification, processor procurement without data, fraud-model outsourcing, or anyone buying a guaranteed “X% revenue lift.”
+
+## Request the audit
+
+Email **layanoraidi@gmail.com** with company, role, markets/payment methods, approximate payment attempts per month and the payment decision you cannot make confidently today.
