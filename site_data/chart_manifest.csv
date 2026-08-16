@@ -1,0 +1,119 @@
+chart_id,category,title,label,value,unit,evidence,note
+AUTH-01,Authorization,Authorization by country,DE,92.41768292682927,%,SYNTHETIC,Canonical 300k seeded merchant environment
+AUTH-01,Authorization,Authorization by country,FR,93.5130186098344,%,SYNTHETIC,Canonical 300k seeded merchant environment
+AUTH-01,Authorization,Authorization by country,NL,93.6381829955471,%,SYNTHETIC,Canonical 300k seeded merchant environment
+AUTH-01,Authorization,Authorization by country,ES,92.58162464344454,%,SYNTHETIC,Canonical 300k seeded merchant environment
+AUTH-01,Authorization,Authorization by country,IT,92.62263706499034,%,SYNTHETIC,Canonical 300k seeded merchant environment
+AUTH-01,Authorization,Authorization by country,AT,93.62030413957104,%,SYNTHETIC,Canonical 300k seeded merchant environment
+AUTH-01,Authorization,Authorization by country,BE,93.59668200911209,%,SYNTHETIC,Canonical 300k seeded merchant environment
+AUTH-01,Authorization,Authorization by country,IE,93.60182501130465,%,SYNTHETIC,Canonical 300k seeded merchant environment
+AUTH-01,Authorization,Authorization by country,FI,93.53551912568306,%,SYNTHETIC,Canonical 300k seeded merchant environment
+AUTH-01,Authorization,Authorization by country,PT,93.64480772806067,%,SYNTHETIC,Canonical 300k seeded merchant environment
+AUTH-02,Authorization,Authorization by device,mobile,92.7564852847267,%,SYNTHETIC,Canonical 300k seeded merchant environment
+AUTH-02,Authorization,Authorization by device,desktop,93.65773538163157,%,SYNTHETIC,Canonical 300k seeded merchant environment
+AUTH-03,Authorization,Authorization by payment method,visa,92.40945317275695,%,SYNTHETIC,Canonical 300k seeded merchant environment
+AUTH-03,Authorization,Authorization by payment method,mastercard,92.4261415425574,%,SYNTHETIC,Canonical 300k seeded merchant environment
+AUTH-03,Authorization,Authorization by payment method,paypal,94.71274402529449,%,SYNTHETIC,Canonical 300k seeded merchant environment
+AUTH-03,Authorization,Authorization by payment method,sepa_debit,94.28341734095742,%,SYNTHETIC,Canonical 300k seeded merchant environment
+AUTH-04,Authorization,Authorization by processor,PSP_A,93.4834862288976,%,SYNTHETIC,Canonical 300k seeded merchant environment
+AUTH-04,Authorization,Authorization by processor,PSP_B,92.74010902991484,%,SYNTHETIC,Canonical 300k seeded merchant environment
+AUTH-04,Authorization,Authorization by processor,PSP_C,92.62763090531279,%,SYNTHETIC,Canonical 300k seeded merchant environment
+AUTH-05,Authorization,Germany processor screen,PSP_A,93.03012404016539,%,SYNTHETIC / OBSERVATIONAL,Raw country x processor comparison; not causal
+AUTH-05,Authorization,Germany processor screen,PSP_B,89.30619266055046,%,SYNTHETIC / OBSERVATIONAL,Raw country x processor comparison; not causal
+AUTH-05,Authorization,Germany processor screen,PSP_C,93.43201542912247,%,SYNTHETIC / OBSERVATIONAL,Raw country x processor comparison; not causal
+DECL-01,Declines,Decline taxonomy,insufficient_funds,6476,count,SYNTHETIC,Canonical seeded declines
+DECL-01,Declines,Decline taxonomy,do_not_honor,5602,count,SYNTHETIC,Canonical seeded declines
+DECL-01,Declines,Decline taxonomy,authentication_failed,4584,count,SYNTHETIC,Canonical seeded declines
+DECL-01,Declines,Decline taxonomy,invalid_account,2433,count,SYNTHETIC,Canonical seeded declines
+DECL-01,Declines,Decline taxonomy,lost_or_stolen,1612,count,SYNTHETIC,Canonical seeded declines
+DECL-02,Declines,Decline mix share,insufficient_funds,31.27541314531318,%,SYNTHETIC,Share of seeded declines
+DECL-02,Declines,Decline mix share,do_not_honor,27.05268749601584,%,SYNTHETIC,Share of seeded declines
+DECL-02,Declines,Decline mix share,authentication_failed,22.13744144492104,%,SYNTHETIC,Share of seeded declines
+DECL-02,Declines,Decline mix share,invalid_account,11.749649876853238,%,SYNTHETIC,Share of seeded declines
+DECL-02,Declines,Decline mix share,lost_or_stolen,7.784808036896701,%,SYNTHETIC,Share of seeded declines
+DECL-03,Declines,Decline share by device,mobile,7.243514715273303,%,SYNTHETIC,Declines / attempts on device
+DECL-03,Declines,Decline share by device,desktop,6.342264618368434,%,SYNTHETIC,Declines / attempts on device
+DECL-04,Declines,Decline share by market,DE,7.582317073170732,%,SYNTHETIC,Declines / attempts by market
+DECL-04,Declines,Decline share by market,FR,6.486981390165598,%,SYNTHETIC,Declines / attempts by market
+DECL-04,Declines,Decline share by market,NL,6.3618170044529,%,SYNTHETIC,Declines / attempts by market
+DECL-04,Declines,Decline share by market,ES,7.418375356555463,%,SYNTHETIC,Declines / attempts by market
+DECL-04,Declines,Decline share by market,IT,7.37736293500966,%,SYNTHETIC,Declines / attempts by market
+DECL-04,Declines,Decline share by market,AT,6.379695860428966,%,SYNTHETIC,Declines / attempts by market
+DECL-04,Declines,Decline share by market,BE,6.403317990887911,%,SYNTHETIC,Declines / attempts by market
+DECL-04,Declines,Decline share by market,IE,6.39817498869535,%,SYNTHETIC,Declines / attempts by market
+DECL-04,Declines,Decline share by market,FI,6.46448087431694,%,SYNTHETIC,Declines / attempts by market
+DECL-04,Declines,Decline share by market,PT,6.35519227193933,%,SYNTHETIC,Declines / attempts by market
+3DS-01,3DS / Authentication,Card authorization by 3DS flag,3DS,91.19560072057233,%,SYNTHETIC,Selected card populations; descriptive only
+3DS-01,3DS / Authentication,Card authorization by 3DS flag,no_3DS,94.03053003580422,%,SYNTHETIC,Selected card populations; descriptive only
+3DS-02,3DS / Authentication,Mobile card authorization by 3DS flag,3DS,90.15348384609533,%,SYNTHETIC,Selected population; not treatment effect
+3DS-02,3DS / Authentication,Mobile card authorization by 3DS flag,no_3DS,94.05302594016003,%,SYNTHETIC,Selected population; not treatment effect
+3DS-03,3DS / Authentication,Desktop card authorization by 3DS flag,3DS,92.92160337552743,%,SYNTHETIC,Selected population; not treatment effect
+3DS-03,3DS / Authentication,Desktop card authorization by 3DS flag,no_3DS,93.9939458888042,%,SYNTHETIC,Selected population; not treatment effect
+3DS-04,3DS / Authentication,Stripe executed test states,success,1,executed,PROVIDER TEST,Redacted provider-test record retained
+3DS-04,3DS / Authentication,Stripe executed test states,generic_decline,1,executed,PROVIDER TEST,Redacted provider-test record retained
+3DS-04,3DS / Authentication,Stripe executed test states,insufficient_funds,1,executed,PROVIDER TEST,Redacted provider-test record retained
+3DS-04,3DS / Authentication,Stripe executed test states,requires_action,1,executed,PROVIDER TEST,Redacted provider-test record retained
+RETRY-01,Retries,Attempts per payment intent,1 attempt,28469,count,SYNTHETIC,Seeded retry cohort
+RETRY-01,Retries,Attempts per payment intent,2 attempts,1316,count,SYNTHETIC,Seeded retry cohort
+RETRY-01,Retries,Attempts per payment intent,3 attempts,215,count,SYNTHETIC,Seeded retry cohort
+RETRY-02,Retries,Attempt vs intent denominator,attempt authorization,87.12593712593713,%,SYNTHETIC,Attempt-weighted authorization
+RETRY-02,Retries,Attempt vs intent denominator,intent resolution,92.19666666666667,%,SYNTHETIC,Unique payment-intent resolution
+RETRY-02,Retries,Attempt vs intent denominator,economic value resolution,92.17844088926843,%,SYNTHETIC,Resolved value / attempted value
+RETRY-03,Retries,Retry success by original decline,insufficient_funds,37.83050847457627,%,SYNTHETIC,Seeded retry cohort
+RETRY-03,Retries,Retry success by original decline,do_not_honor,39.02439024390244,%,SYNTHETIC,Seeded retry cohort
+RETRY-03,Retries,Retry success by original decline,authentication_failed,38.11188811188811,%,SYNTHETIC,Seeded retry cohort
+RETRY-03,Retries,Retry success by original decline,invalid_account,6.666666666666667,%,SYNTHETIC,Seeded retry cohort
+RETRY-03,Retries,Retry success by original decline,lost_or_stolen,0.0,%,SYNTHETIC,Seeded retry cohort
+RETRY-04,Retries,Retry volume and resolution,extra retry attempts,1746,count,SYNTHETIC,Attempts beyond one per intent
+RETRY-04,Retries,Retry volume and resolution,multi-attempt intents,1531,count,SYNTHETIC,Unique intents with >1 attempt
+RETRY-04,Retries,Retry volume and resolution,resolved intents,27659,count,SYNTHETIC,Unique resolved intents
+ROUTE-01,Routing,Germany raw routing comparison,PSP_A,93.03012404016539,%,SYNTHETIC / OBSERVATIONAL,372.39 bps PSP_A vs PSP_B raw gap
+ROUTE-01,Routing,Germany raw routing comparison,PSP_B,89.30619266055046,%,SYNTHETIC / OBSERVATIONAL,372.39 bps PSP_A vs PSP_B raw gap
+ROUTE-02,Routing,Randomized routing experiment,control,89.40331271203353,%,RANDOMIZED SYNTHETIC,Separate 40k randomized experiment
+ROUTE-02,Routing,Randomized routing experiment,treatment,91.88214070956104,%,RANDOMIZED SYNTHETIC,247.88 bps treatment-control
+ROUTE-03,Routing,Observed gap versus identified effect,observed Germany gap,372.3931379614931,bps,SYNTHETIC / OBSERVATIONAL,Not a causal effect
+ROUTE-03,Routing,Observed gap versus identified effect,randomized effect,247.8827997527516,bps,RANDOMIZED SYNTHETIC,95% CI 190.86-304.91 bps
+RISK-01,Fraud / Acceptance,Synthetic fraud guardrail by route,control,2.284,bps,SYNTHETIC,Guardrail simulation; not merchant fraud rate
+RISK-01,Fraud / Acceptance,Synthetic fraud guardrail by route,treatment,2.417,bps,SYNTHETIC,Guardrail simulation; not merchant fraud rate
+RISK-02,Fraud / Acceptance,Authorization vs fraud trade-off,authorization gain,247.8827997527516,bps,RANDOMIZED SYNTHETIC,Randomized synthetic auth effect
+RISK-02,Fraud / Acceptance,Authorization vs fraud trade-off,fraud change,0.133,bps,SYNTHETIC,Separate guardrail simulation
+RISK-03,Fraud / Acceptance,EEA fraud context,total transaction value fraud rate,0.002,%,OFFICIAL SOURCE,EBA/ECB 2025 joint fraud report; market context only
+RISK-03,Fraud / Acceptance,EEA fraud context,2024 reported fraud value,4.2,EUR bn,OFFICIAL SOURCE,EBA/ECB 2025 joint fraud report; market context only
+STATE-01,Payment State,Synthetic payment-state funnel,created,20000,count,SYNTHETIC,Seeded payment-state cohort
+STATE-01,Payment State,Synthetic payment-state funnel,authorized,18499,count,SYNTHETIC,Seeded payment-state cohort
+STATE-01,Payment State,Synthetic payment-state funnel,captured,18019,count,SYNTHETIC,Seeded payment-state cohort
+STATE-01,Payment State,Synthetic payment-state funnel,refunded,1497,count,SYNTHETIC,Seeded payment-state cohort
+STATE-01,Payment State,Synthetic payment-state funnel,disputed,65,count,SYNTHETIC,Seeded payment-state cohort
+STATE-02,Payment State,Naive event count vs state-aware count,captured naive,18350,count,SYNTHETIC,Duplicate delivery inflates event count
+STATE-02,Payment State,Naive event count vs state-aware count,captured state-aware,18019,count,SYNTHETIC,Unique payment-state count
+STATE-02,Payment State,Naive event count vs state-aware count,refund naive,1516,count,SYNTHETIC,Duplicate delivery inflates event count
+STATE-02,Payment State,Naive event count vs state-aware count,refund state-aware,1497,count,SYNTHETIC,Unique payment-state count
+STATE-03,Payment State,Webhook integrity stress,delivered events,61134,count,SYNTHETIC,Seeded event deliveries
+STATE-03,Payment State,Webhook integrity stress,duplicate events,1036,count,SYNTHETIC,1.6946% of delivered events
+STATE-03,Payment State,Webhook integrity stress,out-of-order flags,489,count,SYNTHETIC,Seeded delivery-order anomaly flag
+RECON-01,Reconciliation,Synthetic reconciliation exceptions,clean,11149,count,SYNTHETIC,12k-order reconciliation cohort
+RECON-01,Reconciliation,Synthetic reconciliation exceptions,duplicate_capture,166,count,SYNTHETIC,Seeded exception
+RECON-01,Reconciliation,Synthetic reconciliation exceptions,amount_mismatch,176,count,SYNTHETIC,Seeded exception
+RECON-01,Reconciliation,Synthetic reconciliation exceptions,refund_mismatch,164,count,SYNTHETIC,Seeded exception
+RECON-01,Reconciliation,Synthetic reconciliation exceptions,missing_settlement,177,count,SYNTHETIC,Seeded exception
+RECON-01,Reconciliation,Synthetic reconciliation exceptions,state_mismatch,168,count,SYNTHETIC,Seeded exception
+RECON-02,Reconciliation,Exception value exposure,duplicate_capture,9887.69,EUR,SYNTHETIC,Seeded exception amount
+RECON-02,Reconciliation,Exception value exposure,amount_mismatch,10291.22,EUR,SYNTHETIC,Seeded exception amount
+RECON-02,Reconciliation,Exception value exposure,refund_mismatch,9853.95,EUR,SYNTHETIC,Seeded exception amount
+RECON-02,Reconciliation,Exception value exposure,missing_settlement,10442.76,EUR,SYNTHETIC,Seeded exception amount
+RECON-02,Reconciliation,Exception value exposure,state_mismatch,9822.29,EUR,SYNTHETIC,Seeded exception amount
+RECON-03,Reconciliation,Exception aging,0-2 days,286,count,SYNTHETIC,Seeded aging cohort
+RECON-03,Reconciliation,Exception aging,3-7 days,268,count,SYNTHETIC,Seeded aging cohort
+RECON-03,Reconciliation,Exception aging,8-14 days,175,count,SYNTHETIC,Seeded aging cohort
+RECON-03,Reconciliation,Exception aging,15+ days,122,count,SYNTHETIC,Seeded aging cohort
+ECON-01,Economic Value,Failed-value waterfall,attempted value,16688177.22,EUR,SYNTHETIC,Canonical 300k environment
+ECON-01,Economic Value,Failed-value waterfall,authorized value,15547558.41,EUR,SYNTHETIC,Canonical 300k environment
+ECON-01,Economic Value,Failed-value waterfall,failed value,1140618.81,EUR,SYNTHETIC,Attempted minus authorized value
+ECON-02,Economic Value,Identified synthetic routing value,baseline approved value,4967152.0,EUR,RANDOMIZED SYNTHETIC,Illustrative 100k attempts x EUR55.50 AOV x control auth
+ECON-02,Economic Value,Identified synthetic routing value,incremental approved value,137574.95,EUR,RANDOMIZED SYNTHETIC,Randomized effect x 100k attempts x EUR55.50 AOV
+ECON-02,Economic Value,Identified synthetic routing value,treatment approved value,5104726.95,EUR,RANDOMIZED SYNTHETIC,Illustrative baseline plus identified synthetic effect
+EXP-01,Experimental Effects,Randomized effect with interval,point estimate,247.8827997527516,bps,RANDOMIZED SYNTHETIC,Separate 40k routing experiment
+EXP-01,Experimental Effects,Randomized effect with interval,95% CI low,190.86010121861268,bps,RANDOMIZED SYNTHETIC,Normal approximation interval
+EXP-01,Experimental Effects,Randomized effect with interval,95% CI high,304.9054982868905,bps,RANDOMIZED SYNTHETIC,Normal approximation interval
+EXP-02,Experimental Effects,Per-100k identified effect,incremental approvals,2478.827997527516,count,RANDOMIZED SYNTHETIC,Effect x 100k attempts
+EXP-02,Experimental Effects,Per-100k identified effect,incremental approved value,137574.95,EUR,RANDOMIZED SYNTHETIC,Assumes EUR55.50 average attempt value; illustrative
