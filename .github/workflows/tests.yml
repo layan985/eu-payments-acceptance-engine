@@ -14,3 +14,5 @@ jobs:
           python-version: "3.12"
       - name: Reproduce public evidence and run tests
         run: python reproduce.py
+      - name: Verify publication chart library and due-diligence fixtures
+        run: python reproduce_publication.py
