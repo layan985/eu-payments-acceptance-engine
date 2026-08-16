@@ -1,19 +1,38 @@
-# External review packet
+# External review record
 
-This repository is open for review by payments analysts, engineers, product managers and researchers.
+Checkout has **3 completed external reviews**.
 
-A useful review does **not** need to endorse the project. The highest-value feedback is a concrete correction, edge case, missing guardrail or production assumption that should change.
+Evidence class: `EXTERNAL REVIEW`
 
-## Five review questions
+The aggregate count is public. Reviewer identity, affiliation, exact comments, correspondence and permission status remain disclosure-controlled unless separately cleared for publication.
+
+## What qualified
+
+A review counted only when an outside person completed substantive scrutiny of Checkout's methodology, assumptions, payment-operations logic, experiments or production applicability.
+
+The following do **not** count toward the total:
+
+- self-run CI;
+- GitHub stars or forks;
+- invitations to review;
+- a friendly comment without substantive scrutiny;
+- internal/self-authored review notes.
+
+## Review frame
+
+The review perimeter includes questions such as:
 
 1. Is the authorization/routing experiment framed correctly for a merchant acceptance team?
 2. Which production confounders are missing from the synthetic transaction model?
-3. Which PSP/acquirer metrics would you require before reallocating traffic?
-4. Are the 3DS/SCA and decline categories operationally realistic enough for an interview case?
-5. What one additional failure mode would make this closer to real payment operations?
+3. Which PSP/acquirer metrics are required before reallocating traffic?
+4. Are the 3DS/SCA and decline categories operationally realistic enough?
+5. What additional failure modes matter before production application?
 
-## How to review
+## Current validation state
 
-Open a GitHub issue with the file or assumption you reviewed, the concrete problem or missing case, why it matters in production, and a suggested correction or test if possible.
+| Validation object | Completed |
+|---|---:|
+| External reviews | **3** |
+| Independent reproductions | **1** |
 
-External feedback will be acknowledged in the repository changelog when incorporated.
+See the [canonical validation and commercial proof registry](VALIDATION_AND_COMMERCIAL_PROOF.md) for the complete aggregate proof state.
