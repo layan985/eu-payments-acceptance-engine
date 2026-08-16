@@ -40,13 +40,21 @@ Access is limited to the minimum required for the engagement. Systems containing
 
 The public Request Audit form is for commercial scoping metadata only. **Do not upload or paste payment records into the public form.** Production-data transfer is agreed separately after scope and security expectations are confirmed, using an encrypted transfer path appropriate to the engagement.
 
+### Public-form processor
+
+The current public request form uses **FormSubmit** as an email-forwarding transport behind Checkout's same-origin intake endpoint. FormSubmit states that submissions may be retained for **30 days** in its submission archive. For that reason, the form is deliberately restricted to company/contact/scoping information and accepts **no files or production payment records**. This processor can be replaced without changing the production-data perimeter.
+
+[FormSubmit documentation](https://formsubmit.co/documentation)
+
 ## Retention
 
-The retention period is agreed before analysis. Data should not be kept indefinitely merely because an audit has finished.
+The production-data retention period is agreed before analysis. Data should not be kept indefinitely merely because an audit has finished.
+
+Public-form scoping submissions are subject to the form processor's separate retention boundary described above.
 
 ## Deletion
 
-Where required by the engagement, deletion is performed at close and confirmed. Any retained derived artifact must remain within the agreed permitted-use boundary.
+Where required by the engagement, production client data is deleted at close and confirmed. Any retained derived artifact must remain within the agreed permitted-use boundary.
 
 ## Confidentiality
 
@@ -66,4 +74,4 @@ Use the [Request Audit / Contact page](/contact) and select **Security / confide
 
 Checkout does **not** claim PCI DSS certification, processor certification, scheme certification or provider partnership unless a current verifiable basis exists. Stripe sandbox execution remains labelled `PROVIDER TEST`, not production certification.
 
-[Canonical security standard](https://github.com/layan985/eu-payments-acceptance-engine/blob/main/institution/SECURITY_CONFIDENTIALITY.md)
+[Canonical security standard](https://github.com/layan985/eu-payments-acceptance-engine/blob/main/institution/SECURITY_CONFIDENTIALITY.md) · [Public intake contract](https://github.com/layan985/eu-payments-acceptance-engine/blob/main/institution/AUDIT_INTAKE_CONTRACT.md)
