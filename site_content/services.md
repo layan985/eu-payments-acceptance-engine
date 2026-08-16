@@ -18,7 +18,7 @@ A Head of Payments should be able to decide whether this is relevant without boo
 
 Default intake excludes full PAN, CVV/CVC, card-track data, authentication secrets, private keys, passwords and unnecessary directly identifying customer data. Preferred identifiers are merchant-generated non-sensitive IDs, provider object IDs and pseudonymized references.
 
-**Security standard:** [Data Security & Client Confidentiality](https://github.com/layan985/eu-payments-acceptance-engine/blob/main/institution/SECURITY_CONFIDENTIALITY.md)
+**Security standard:** [Security & Confidentiality](/security)
 
 ## Analysis stages
 
@@ -82,6 +82,8 @@ Every issue ends in one state: **FIX · INVESTIGATE · TEST · DO NOT TOUCH**, w
 <div><span>DO NOT TOUCH</span><b>Hard decline repeat</b><strong>blocked</strong><p>No blind recovery loop for hard/sensitive failure classes.</p></div>
 </div>
 
+[See the full sample Day 5 delivery →](/sample-delivery)
+
 ## What happens during the engagement
 
 **Start:** written scope + permitted-use/data perimeter.  
@@ -107,4 +109,6 @@ Generic CRO design, PCI certification, processor procurement without data, fraud
 
 ## Request the audit
 
-Email **layanoraidi@gmail.com** with company, role, markets/payment methods, approximate payment attempts per month and the payment decision you cannot make confidently today.
+Use the structured [Request Audit form](/contact). The public form collects commercial scoping metadata only; production payment data is transferred separately after scope and security expectations are agreed.
+
+[Commercial FAQ](/faq) · [Security & Confidentiality](/security)
