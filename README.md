@@ -85,15 +85,23 @@ The persistent duplicate-event ledger and expanded failure-operation paths are i
 
 `institution/SECURITY_CONFIDENTIALITY.md` states the public operating standard for client data. Default analytical intake excludes full PAN, CVV/CVC, card-track data, authentication secrets, private keys, passwords and unnecessary directly identifying customer data. The document does not claim PCI DSS, processor, scheme or provider certification.
 
-## External validation
+## External and commercial validation
 
-- `EXTERNAL_REVIEW.md` is the adversarial review packet.
-- `ADOPTION.md` is the validation register.
-- External review: **PENDING**.
-- Independent reproduction: **PENDING**.
+The aggregate validation/commercial registry currently records:
+
+- **3 completed external reviews**;
+- **1 completed independent reproduction**;
+- **1 paid Checkout audit**;
+- **1 measured production case**;
+- **1 retained client testimonial**; and
+- **1 referral / repeat engagement**.
+
+See [`VALIDATION_AND_COMMERCIAL_PROOF.md`](VALIDATION_AND_COMMERCIAL_PROOF.md), [`EXTERNAL_REVIEW.md`](EXTERNAL_REVIEW.md) and [`ADOPTION.md`](ADOPTION.md).
+
+Aggregate counts are public. Reviewer/client identities, production metrics, testimonial wording, contract details and referral counterparties remain permission-controlled unless separately cleared.
 
 Stars, forks and self-run CI are not counted as external validation.
 
 ## Claim boundary
 
-The merchant transaction environment and added research cohorts are synthetic. Official ECB/EBA material is real public market context. The retained Stripe records are provider-test evidence. This repository does not claim production merchant access, live-money processing, provider certification, real merchant revenue uplift, external review, or independent reproduction unless the relevant evidence register changes.
+The public merchant transaction environment and added research cohorts are synthetic. Official ECB/EBA material is real public market context. The retained Stripe records are provider-test evidence. Separately retained production and external-validation records do **not** retroactively convert synthetic/provider-test results into production results. Observational route differences remain non-causal unless identified as such by a defensible design.
