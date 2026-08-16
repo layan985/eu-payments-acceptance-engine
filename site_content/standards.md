@@ -12,12 +12,13 @@ Checkout is maintained as a versioned technical and commercial record rather tha
 | Public methodology | **Payment Performance Audit Methodology v1.0** |
 | Security standard | **Data Security & Client Confidentiality v1.0** |
 | Outcome validation protocol | **v1.0** |
+| Audit intake contract | **v1.0** |
 | Canonical repository | `layan985/eu-payments-acceptance-engine` |
-| Canonical public commit at this update | `15c0e974e8ab0711400568580d0c3457f42e2506` plus subsequent site-content updates |
+| Canonical public commit at this update | `9cae0caf64f87ec66f056fab408a6d843398f196` |
 | Reproduction command | `python reproduce.py` |
 | Publication verification | `python reproduce_publication.py` |
 
-The footer/site may point to a newer commit as maintenance continues. Git history is the authoritative change record.
+Git history is the authoritative change record. Later maintenance commits supersede this pinned reference and should be reflected on the next standards update.
 
 ## Source policy
 
