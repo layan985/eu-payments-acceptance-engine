@@ -1,8 +1,8 @@
 # Case File 001 — Zalando Checkout Investigation
 
-<div class="meta-line"><span>OFFICIAL / FIRST-PARTY SOURCES</span><span>PUBLIC-SOURCE INFERENCE</span><span>SYNTHETIC RECONSTRUCTION</span></div>
+<div class="meta-line"><span>INDEPENDENT PUBLIC-SOURCE INVESTIGATION</span><span>NOT A CLIENT</span><span>OFFICIAL / FIRST-PARTY SOURCES</span><span>SYNTHETIC RECONSTRUCTION</span></div>
 
-<div class="callout danger"><b>Zalando is not a client of Checkout.</b> No production data, internal routing, fraud rules, conversion rates or commercial contracts were accessed.</div>
+<div class="callout danger"><b>INDEPENDENT PUBLIC-SOURCE INVESTIGATION · NOT A CLIENT.</b><p>Zalando has not commissioned, reviewed or endorsed this work. No production data, internal routing, fraud rules, conversion rates or commercial contracts were accessed.</p></div>
 
 ## Executive finding
 
