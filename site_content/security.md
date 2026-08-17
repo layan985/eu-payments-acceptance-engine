@@ -1,8 +1,14 @@
 # Security & Confidentiality
 
-<div class="meta-line"><span>PUBLIC OPERATING STANDARD</span><span>DATA MINIMIZATION</span><span>NO UNCLAIMED CERTIFICATIONS</span></div>
+<div class="meta-line"><span>PUBLIC OPERATING STANDARD</span><span>FOUNDER-LED ACCESS</span><span>DATA MINIMIZATION</span><span>NO UNCLAIMED CERTIFICATIONS</span></div>
 
 Checkout is designed so a payment-acceptance audit can usually be performed without receiving raw card credentials or unnecessary customer identity data.
+
+## Who handles production data
+
+Checkout is operated by **Layan Aloreidi**. By default, Layan Aloreidi is the engagement lead, primary analyst and production-data handler. A buyer is not silently handing data to an undisclosed team.
+
+The written engagement identifies the contracting identity, approved access perimeter, permitted use, transfer path, retention/deletion position and incident contact before any production data is transferred. Additional people do not receive access by default; any additional approved access must be disclosed and bounded inside the engagement.
 
 ## Data accepted
 
@@ -42,7 +48,9 @@ The public Request Audit form is for commercial scoping metadata only. **Do not 
 
 ### Public-form processor
 
-The current public request form uses **FormSubmit** as an email-forwarding transport behind Checkout's same-origin intake endpoint. FormSubmit states that submissions may be retained for **30 days** in its submission archive. For that reason, the form is deliberately restricted to company/contact/scoping information and accepts **no files or production payment records**. This processor can be replaced without changing the production-data perimeter.
+The current public request form uses **FormSubmit** as an email-forwarding transport. FormSubmit states that submissions may be retained for **30 days** in its submission archive. For that reason, the form is deliberately restricted to company/contact/scoping information and accepts **no files or production payment records**.
+
+This is a temporary public-intake dependency, not part of the production-data path. Replacing it with a first-party intake endpoint and domain mailbox is an active commercial-infrastructure improvement; until that migration is complete, the processor boundary remains explicitly disclosed rather than hidden.
 
 [FormSubmit documentation](https://formsubmit.co/documentation)
 
@@ -66,9 +74,11 @@ A paid engagement is **not automatically a publishable case study**. Permission 
 
 Anonymization is not treated as a substitute for permission where the underlying facts could reasonably identify the client.
 
-## Incident contact
+## Incident ownership
 
-Use the [Request Audit / Contact page](/contact) and select **Security / confidentiality**. A material confidentiality, integrity or availability incident is recorded with detection time, affected perimeter, containment action, notification status, corrective action and closure evidence.
+A material confidentiality, integrity or availability incident is owned by the engagement lead named in the written scope. The record includes detection time, affected perimeter, containment action, notification status, corrective action and closure evidence.
+
+Use the [Request Audit / Contact page](/contact) and select **Security / confidentiality** for the current public contact route.
 
 ## Certification boundary
 
