@@ -1,12 +1,12 @@
 # CASE FILE 002 — Booking.com travel-payment architecture
 
-<div class="meta-line"><span>INDEPENDENT PUBLIC-SOURCE ANALYSIS</span><span>NOT A CLIENT</span><span>PUBLIC SOURCES + SYNTHETIC RECONSTRUCTION</span><span>TRAVEL / MULTI-EVENT PAYMENT ARCHITECTURE</span></div>
+<div class="meta-line"><span>INDEPENDENT PUBLIC-SOURCE INVESTIGATION</span><span>NOT A CLIENT</span><span>PUBLIC SOURCES + SYNTHETIC RECONSTRUCTION</span><span>TRAVEL / MULTI-EVENT PAYMENT ARCHITECTURE</span></div>
+
+<div class="callout danger"><b>INDEPENDENT PUBLIC-SOURCE INVESTIGATION · NOT A CLIENT.</b><p>Booking.com has not commissioned, reviewed or endorsed this analysis. No production Booking.com transaction data, private provider contracts, internal fraud logic, conversion rates or payment-routing data are used.</p></div>
 
 This case file asks a narrower question than “is Booking.com checkout good?”:
 
 > **Where would I instrument a travel-booking payment system so that payment failures, schedule mismatches, cancellations, refunds and payout exceptions can be distinguished from each other before somebody calls all of them conversion loss?**
-
-Booking.com has not commissioned, reviewed or endorsed this analysis. No production Booking.com transaction data, private provider contracts, internal fraud logic, conversion rates or payment-routing data are used.
 
 ## 01 — Why this is structurally different from Case File 001
 
