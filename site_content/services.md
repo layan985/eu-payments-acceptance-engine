@@ -1,10 +1,12 @@
 # Checkout Leak Audit · €1,950
 
-<div class="meta-line"><span>FOUNDING PRODUCTION OFFER</span><span>50% UPFRONT</span><span>FIXED SCOPE</span></div>
+<div class="meta-line"><span>FOUNDING PRODUCTION RATE</span><span>50% UPFRONT</span><span>FIXED SCOPE</span><span>LIMITED EARLY CASE CAPACITY</span></div>
 
-<div class="price-card"><b>€1,950</b><span>€975 upfront · €975 on delivery</span><small>no percentage-of-uplift fee</small></div>
+<div class="price-card"><b>€1,950</b><span>€975 upfront · €975 on delivery</span><small>founding production rate · limited early-case allocation</small></div>
 
-A Head of Payments should be able to decide whether this is relevant without booking a discovery call. The scope is fixed after the decision question and data perimeter are confirmed.
+This is **founding production pricing**, not the intended long-run price for the service. It is deliberately below the eventual specialist-practice rate while the first additional permissioned production cases are being built. The scope is fixed after the decision question and data perimeter are confirmed.
+
+A Head of Payments should be able to decide whether this is relevant without booking a discovery call.
 
 ## Inputs
 
@@ -19,6 +21,18 @@ A Head of Payments should be able to decide whether this is relevant without boo
 Default intake excludes full PAN, CVV/CVC, card-track data, authentication secrets, private keys, passwords and unnecessary directly identifying customer data. Preferred identifiers are merchant-generated non-sensitive IDs, provider object IDs and pseudonymized references.
 
 **Security standard:** [Security & Confidentiality](/security)
+
+## What the engagement actually feels like
+
+| Day | Checkout work | Client provides / confirms | Gate before moving on |
+|---|---|---|---|
+| **Day 0 · Scope** | lock decision question, objects, markets, denominator, exclusions, permitted-use and data perimeter | decision owner, scope, minimum field inventory, access/transfer expectations | written measurement contract + approved perimeter |
+| **Day 1 · QA** | identifier tests, duplicates, missingness, timestamp/state checks, denominator reconstruction | clarifications on field semantics and known data quirks | canonical object/state map is defensible |
+| **Day 2–3 · Diagnostics** | failed-value decomposition, decline/3DS/retry cuts, route screens, lifecycle/reconciliation exceptions | rapid clarification only where a field or state is ambiguous | every material finding carries an evidence class and limitation |
+| **Day 4 · Decision review** | rank findings, kill weak hypotheses, define FIX / INVESTIGATE / TEST / DO NOT TOUCH | decision-maker review of operational constraints and feasible interventions | recommendations are bounded by evidence and implementation reality |
+| **Day 5 · Delivery** | deliver 8–15 page decision pack + reproducible analytical outputs + readout | acceptance / questions / implementation ownership | proof ledger, limitations register and action register closed |
+
+If the Day 1 QA shows the data cannot support the intended decision, that is surfaced immediately rather than hidden behind a polished report.
 
 ## Analysis stages
 
@@ -83,6 +97,12 @@ Every issue ends in one state: **FIX · INVESTIGATE · TEST · DO NOT TOUCH**, w
 </div>
 
 [See the full sample Day 5 delivery →](/sample-delivery)
+
+## Founding-rate boundary
+
+The €1,950 price is reserved for a limited number of early production engagements while Checkout builds additional permissioned third-party proof. The service is not being positioned as permanent low-cost freelance work. Once the founding allocation is filled, pricing is expected to move upward with the evidence base and delivery history.
+
+No urgency claim is fabricated: the site will not display a fake countdown or fake remaining-slot number.
 
 ## What happens during the engagement
 
