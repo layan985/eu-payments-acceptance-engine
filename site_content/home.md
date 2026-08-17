@@ -8,9 +8,11 @@ Checkout diagnoses authorization loss, authentication friction, retry behavior, 
 
 ## External + production proof
 
-<div class="metric-grid"><div><b>3</b><span>external reviewers</span></div><div><b>1</b><span>independent reproduction</span></div><div><b>1</b><span>paid audit</span></div><div><b>1</b><span>measured production case</span></div><div><b>1</b><span>client testimonial</span></div><div><b>1</b><span>referral / repeat engagement</span></div></div>
+<div class="metric-grid"><div><b>3</b><span>external reviews completed</span></div><div><b>1</b><span>independent reproduction completed</span></div><div><b>1</b><span>paid audit completed</span></div><div><b>1</b><span>measured production case retained</span></div><div><b>1</b><span>client testimonial retained</span></div><div><b>1</b><span>referral / repeat engagement retained</span></div></div>
 
-Aggregate proof counts are public. Reviewer/client identities, production metrics, testimonial wording, contract details and referral counterparties remain permission-controlled unless explicitly cleared for publication.
+These are **aggregate proof counts, not substitutes for a public case study**. Reviewer/client identities, production metrics, testimonial wording, contract details and referral counterparties remain permission-controlled unless explicitly cleared for publication. Where a public quote, metric or client identity is unavailable, Checkout says so rather than implying more disclosure than exists.
+
+Third-party evidence is now the priority: additional external reproduction, external review, permissioned production cases and client validation are more valuable than simply publishing another self-authored report.
 
 ## What gets interrogated
 
@@ -29,20 +31,22 @@ Aggregate proof counts are public. Reviewer/client identities, production metric
 - [Report 002 · The Authorization Rate Is Lying to You](/research/authorization-rate)
 - [Report 003 · Payment State Integrity](/research/payment-state-integrity)
 - [Evidence Room](/evidence)
-- [Case File 001 · Zalando public-source investigation](/case-files/zalando)
-- [Case File 002 · Booking.com travel-payment architecture](/case-files/booking)
+- [Case File 001 · Zalando — INDEPENDENT PUBLIC-SOURCE INVESTIGATION · NOT A CLIENT](/case-files/zalando)
+- [Case File 002 · Booking.com — INDEPENDENT PUBLIC-SOURCE INVESTIGATION · NOT A CLIENT](/case-files/booking)
 - [One-URL Proof Packet](/proof-packet)
-- [Production outcomes](/client-outcomes)
-- [Fixed €1,950 production scope](/services)
+- [Production outcomes + disclosure boundary](/client-outcomes)
+- [Founding Production Rate · €1,950](/services)
 
 <div class="callout"><b>A 372 bps processor gap is not a 372 bps optimization opportunity.</b><p>The raw Germany comparison is descriptive. The 247.88 bps result is a separate randomized synthetic experiment. Those public demonstration results remain distinct from the separately recorded measured production case. Selection, eligibility, retry contamination, fraud, dispute, latency and processing-cost guardrails are not allowed to disappear because a headline number looks attractive.</p></div>
 
 ## What a buyer actually receives
 
-The production standard is an **8–15 page decision pack plus reproducible analytical outputs**, not a generic strategy deck. The buyer room is expected to contain the payment Data QA report, metric dictionary, failed-value waterfall, decline taxonomy, 3DS friction view, country × payment-method cuts, route/provider screen with causality warnings, retry/recovery analysis, lifecycle and reconciliation exceptions, intervention register, Proof Ledger, Methodology, Limitations Register and the analysis files needed to interrogate the result.
+The production standard is an **8–15 page decision pack plus reproducible analytical outputs**, not a generic strategy deck. The buyer room is expected to contain the Payment Data QA report, metric dictionary, failed-value waterfall, decline taxonomy, 3DS friction view, country × payment-method cuts, route/provider screen with causality warnings, retry/recovery analysis, lifecycle and reconciliation exceptions, intervention register, Proof Ledger, Methodology, Limitations Register and the analysis files needed to interrogate the result.
 
 Every material number carries the strongest evidence label actually available: **OFFICIAL SOURCE, REAL PUBLIC DATA, PROVIDER TEST, SYNTHETIC, RANDOMIZED SYNTHETIC, PRODUCTION CLIENT DATA, EXTERNAL REVIEW, INDEPENDENT REPRODUCTION or PENDING VALIDATION.** Observed differences are not rewritten as causal effects.
 
-## Founding production offer
+## Founding Production Rate
 
-**Checkout Leak Audit · €1,950 · 50% upfront · fixed scope.** Exact inputs, stages, deliverables, refusal boundaries and data-security expectations are public on the [service page](/services). Every engagement closes with a Proof Ledger, a Limitations Register and a decision register: **FIX · INVESTIGATE · TEST · DO NOT TOUCH.**
+**Checkout Leak Audit · €1,950 · 50% upfront · fixed scope · limited early-case allocation.** This is deliberately a **Founding Production Rate**, not the intended long-run specialist-practice price. The rate exists while additional permissioned production cases and third-party validation are being built; pricing is expected to rise with the evidence base and delivery history.
+
+Exact inputs, Day 0–5 operating timeline, deliverables, refusal boundaries and data-security expectations are public on the [service page](/services). Every engagement closes with a Proof Ledger, a Limitations Register and a decision register: **FIX · INVESTIGATE · TEST · DO NOT TOUCH.**
