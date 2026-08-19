@@ -6,6 +6,29 @@ A public technical record for diagnosing payment-acceptance loss without turning
 
 > **Question:** when authorization differs across markets, devices, authentication paths and routes, what is actually established, what is merely observed, and what intervention is safe to test?
 
+## Research Note 001 — The PSP leaderboard was the wrong decision rule
+
+A separate deterministic synthetic routing study now tests a harder question: whether a PSP that is worse on average can still belong in a better conditional routing policy.
+
+| Stage | Result | Evidence class |
+|---|---:|---|
+| Historical PSP_B − PSP_A | -271.5 bps | `SYNTHETIC · OBSERVATIONAL · NOT CAUSAL` |
+| Randomized all-B − all-A | -63.8 bps | `RANDOMIZED SYNTHETIC` |
+| Randomized 95% CI | -96.0 to -31.6 bps | `RANDOMIZED SYNTHETIC` |
+| Frozen policy share sent to PSP_B | 10.38% | `DISCOVERY RULE · FROZEN BEFORE HOLDOUT` |
+| Independent holdout policy effect | +46.0 bps | `RANDOMIZED SYNTHETIC · HOLDOUT` |
+| Holdout 95% CI | +14.8 to +77.2 bps | `RANDOMIZED SYNTHETIC · HOLDOUT` |
+| Holdout two-sided p-value | 0.0038 | `RANDOMIZED SYNTHETIC · HOLDOUT` |
+
+The design uses **250,000 historical attempts**, **100,000 randomized discovery attempts**, and **100,000 independent randomized validation attempts**. The discovery stage evaluates 24 pre-defined issuer × 3DS × cross-border × scheme cells, applies a minimum sample threshold, freezes the rule, and only then evaluates the policy on untouched holdout data.
+
+**Interpretation:** PSP_B is worse globally under randomization, but the frozen policy still routes 10.38% of traffic to PSP_B and outperforms an all-PSP_A strategy on the independent holdout. Provider rankings and transaction-routing policies answer different questions.
+
+- [`RESEARCH_NOTE_001.md`](RESEARCH_NOTE_001.md) — methodology, results, selected cells, limitations and evidence boundary.
+- [`research_note_001.py`](research_note_001.py) — fixed-seed executable experiment with drift assertions on the published headline metrics.
+
+This is a **synthetic methodological demonstration**, not a benchmark of any real PSP and not a production revenue claim.
+
 ## One-command reproduction
 
 ```bash
@@ -22,6 +45,8 @@ That single command, with no network access and no provider credentials:
 6. runs the full unit-test suite.
 
 The command exits non-zero on metric drift or test failure. Generated research data is written to `output/research_artifacts/`.
+
+`research_note_001.py` is a separate policy-learning study and is intentionally not conflated with the canonical 300,000-attempt diagnostic or the legacy 40,000-attempt experiment above.
 
 ## Canonical seeded results
 
@@ -73,6 +98,7 @@ The persistent duplicate-event ledger and expanded failure-operation paths are i
 - `generate_data.py` — deterministic synthetic merchant environment.
 - `analyze.py` — market × processor acceptance diagnostics and decline taxonomy.
 - `experiment.py` — randomized synthetic routing evaluation with confidence interval.
+- `research_note_001.py` — randomized discovery → frozen conditional routing policy → independent holdout validation.
 - `research_artifacts.py` — retry-denominator and payment-state research datasets.
 - `reproduce.py` — canonical one-command verification gate.
 - `provider_sandboxes/stripe_sandbox.py` — PaymentIntent test scenarios.
