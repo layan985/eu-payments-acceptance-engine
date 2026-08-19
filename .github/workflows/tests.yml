@@ -12,7 +12,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Reproduce public evidence and run tests
+      - name: Reproduce canonical public evidence and run tests
         run: python reproduce.py
       - name: Verify publication chart library and due-diligence fixtures
         run: python reproduce_publication.py
+      - name: Install RN-001 pinned analysis environment
+        run: python -m pip install --disable-pip-version-check -r requirements-rn001.txt
+      - name: Reproduce RN-001 randomized routing policy study
+        run: python research_note_001.py
