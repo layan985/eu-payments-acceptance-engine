@@ -1,134 +1,80 @@
-# Checkout Leak Audit · €1,950
+# Recoverability Scan · €950
 
-<div class="meta-line"><span>FOUNDING PRODUCTION RATE</span><span>50% UPFRONT</span><span>FIXED SCOPE</span><span>LIMITED EARLY CASE CAPACITY</span></div>
+<div class="meta-line"><span>48-HOUR ENTRY PRODUCT</span><span>100% UPFRONT</span><span>ANONYMIZED EXPORT</span><span>PFX-1 SCREENING</span></div>
 
-<div class="price-card"><b>€1,950</b><span>€975 upfront · €975 on delivery</span><small>founding production rate · limited early-case allocation</small></div>
+<div class="price-card"><b>€950</b><span>one anonymized payment export · fixed scope · 48-hour decision</span><small>credited in full if upgraded to the €1,950 Checkout Leak Audit</small></div>
 
-This is **founding production pricing**, not the intended long-run price for the service. It is deliberately below the eventual specialist-practice rate while the first additional permissioned production cases are being built. The scope is fixed after the decision question and data perimeter are confirmed.
+The first question is not “how do we optimize everything?” It is narrower:
 
-A Head of Payments should be able to decide whether this is relevant without booking a discovery call.
+> **Is there enough structured recoverability in your failed demand to justify changing anything?**
 
-## Inputs
+The Recoverability Scan is the commercial entry point to Checkout's PFX-1 research. It screens historical payment data for where failed value concentrates, which rescue actions appear operationally testable, and whether a randomized production experiment is economically worth running.
 
-| Input | Minimum useful fields | Default security boundary |
-|---|---|---|
-| payment attempts / intents | stable IDs, timestamp, amount, market, method, route, result | no PAN/CVV/card-track |
-| authentication | 3DS state, exemption/flow where available, result | no authentication secrets |
-| declines | normalized reason/code, soft/hard classification | sensitive provider/issuer text minimized |
-| lifecycle | authorization, capture, refund, reversal/dispute states + timestamps | non-sensitive provider object IDs |
-| economics / reconciliation | provider fees, payout/settlement identifiers where in scope | only fields needed for agreed decision |
+It **does not** turn observational history into a causal uplift claim. If the data cannot support a useful experiment, the answer is allowed to be “do not run one.”
 
-Default intake excludes full PAN, CVV/CVC, card-track data, authentication secrets, private keys, passwords and unnecessary directly identifying customer data. Preferred identifiers are merchant-generated non-sensitive IDs, provider object IDs and pseudonymized references.
+## What to send
 
-**Security standard:** [Security & Confidentiality](/security)
+One de-identified attempt / intent export covering a useful recent period. Minimum useful fields are:
 
-## What the engagement actually feels like
+| Object | Useful fields |
+|---|---|
+| payment identity | stable attempt and payment-intent/order IDs |
+| transaction | timestamp, amount, currency, market, method |
+| processing | PSP/acquirer/route, result, normalized decline code/reason |
+| authentication | 3DS eligibility/state/result where available |
+| retry | retry sequence or parent-intent linkage |
+| credential | token / stored-credential state where lawfully available |
 
-| Day | Checkout work | Client provides / confirms | Gate before moving on |
-|---|---|---|---|
-| **Day 0 · Scope** | lock decision question, objects, markets, denominator, exclusions, permitted-use and data perimeter | decision owner, scope, minimum field inventory, access/transfer expectations | written measurement contract + approved perimeter |
-| **Day 1 · QA** | identifier tests, duplicates, missingness, timestamp/state checks, denominator reconstruction | clarifications on field semantics and known data quirks | canonical object/state map is defensible |
-| **Day 2–3 · Diagnostics** | failed-value decomposition, decline/3DS/retry cuts, route screens, lifecycle/reconciliation exceptions | rapid clarification only where a field or state is ambiguous | every material finding carries an evidence class and limitation |
-| **Day 4 · Decision review** | rank findings, kill weak hypotheses, define FIX / INVESTIGATE / TEST / DO NOT TOUCH | decision-maker review of operational constraints and feasible interventions | recommendations are bounded by evidence and implementation reality |
-| **Day 5 · Delivery** | deliver 8–15 page decision pack + reproducible analytical outputs + readout | acceptance / questions / implementation ownership | proof ledger, limitations register and action register closed |
+No PAN, CVV/CVC, card-track data, authentication secrets, passwords or unnecessary customer-identifying fields.
 
-If the Day 1 QA shows the data cannot support the intended decision, that is surfaced immediately rather than hidden behind a polished report.
+## What comes back in 48 hours
 
-## Analysis stages
+### 01 · Failed-value map
 
-### 01 · Perimeter + measurement contract
+Where failed economic value actually concentrates by issuer/market, route, payment method, 3DS state, credential state and retry sequence where those fields exist.
 
-Lock the decision question, payment objects, eligibility rule, denominator, time window and exclusions before analysis starts.
+### 02 · Recoverability screen
 
-### 02 · Data QA + state integrity
+Candidate populations that look potentially route-sensitive, authentication-sensitive, credential-sensitive, time-sensitive or unlikely to justify intervention. These are **hypothesis classes**, not causal labels.
 
-Check identifiers, duplicates, missing states, impossible transitions, timestamp/order consistency and reconciliation perimeter. A broken event model is fixed before performance is optimized.
+### 03 · Action-set audit
 
-### 03 · Loss decomposition
+Which interventions the current stack can realistically test: alternate route, 3DS treatment, token/credential treatment, compliant delayed retry, or control.
 
-Authorization and failed-value maps by market, method, device, route, issuer/BIN attributes where lawful, authentication state and decline class.
+### 04 · Experiment viability
 
-### 04 · Retry + authentication
+Whether the merchant has enough eligible failed intents, treatment optionality and observable guardrails to run PFX-1 credibly.
 
-Separate attempt, intent and economic denominators; isolate retry contamination and selected authentication populations.
+### 05 · Decision
 
-### 05 · Routing + economics
+One of four outputs:
 
-Screen route differences; refuse causal wording until assignment/identification is defensible; join fraud, dispute, latency and processing-cost guardrails where available.
+**RUN PFX-1 · RUN A NARROWER TEST · FIX MEASUREMENT FIRST · DO NOT TEST YET**
 
-### 06 · Decision memo
+You get the reasoning, the relevant segments, the proposed primary outcome and the guardrails required before any causal claim.
 
-Every issue ends in one state: **FIX · INVESTIGATE · TEST · DO NOT TOUCH**, with evidence, limitation and next action.
+## What this is not
 
-## Exact deliverables
+- no guaranteed authorization lift;
+- no “AI recovered X revenue” claim from historical correlations;
+- no blind retry recommendation;
+- no processor migration pitch;
+- no requirement to publish the merchant's identity or data.
 
-### Measurement + QA
+## If the scan finds something real
 
-- Payment Data QA report
-- metric dictionary
-- object/state map
-- provenance/transformation notes
-- limitations register
+The next step can be a bounded randomized PFX-1 replication. Eligible failures are assigned only among merchant-approved, scheme-compliant actions. The policy is learned on discovery traffic, frozen, and evaluated once on untouched validation traffic with fraud, dispute, cost, latency and customer-friction guardrails.
 
-### Payment forensics
+[Read the public PFX-1 experiment →](/research/recoverability-frontier)
 
-- failed-value waterfall
-- authorization map
-- decline forensics
-- 3DS diagnostic
-- retry analysis
-- routing screen where identifiable
-- payment-state / reconciliation exceptions
+## Upgrade path
 
-### Decision layer
+If broader payment-state, routing, 3DS, retry, reconciliation or lifecycle work is needed, the €950 is credited **in full** against the **€1,950 Checkout Leak Audit**.
 
-- experiment designs
-- primary outcome + guardrails
-- executive decision memo
-- technical appendix
-- FIX / INVESTIGATE / TEST / DO NOT TOUCH register
+The full audit retains the existing five-day production scope and 50% upfront structure.
 
-## Sample output preview
+## Request the scan
 
-<div class="decision-cards">
-<div><span>INVESTIGATE</span><b>Observed route gap</b><strong>372 bps</strong><p>Do not annualize. Check mix, eligibility and assignment first.</p></div>
-<div><span>TEST</span><b>Identified intervention</b><strong>pre-specified</strong><p>Randomize eligible traffic; monitor authorization + fraud + dispute + latency + cost.</p></div>
-<div><span>DO NOT TOUCH</span><b>Hard decline repeat</b><strong>blocked</strong><p>No blind recovery loop for hard/sensitive failure classes.</p></div>
-</div>
+Use the [structured intake form](/contact). Select the Checkout Leak Audit inquiry type and put **Recoverability Scan** in the decision field. Do not upload production payment data through the public form; secure transfer is agreed after scope.
 
-[See the full sample Day 5 delivery →](/sample-delivery)
-
-## Founding-rate boundary
-
-The €1,950 price is reserved for a limited number of early production engagements while Checkout builds additional permissioned third-party proof. The service is not being positioned as permanent low-cost freelance work. Once the founding allocation is filled, pricing is expected to move upward with the evidence base and delivery history.
-
-No urgency claim is fabricated: the site will not display a fake countdown or fake remaining-slot number.
-
-## What happens during the engagement
-
-**Start:** written scope + permitted-use/data perimeter.  
-**Analysis:** work proceeds against the locked measurement contract; missing evidence is marked unresolved rather than guessed.  
-**Delivery:** one decision pack plus reproducible analytical outputs.  
-**Close:** agreed retention/deletion expectations are followed. Any public case record requires separate explicit permission.
-
-## What Checkout refuses to claim
-
-- an observed processor difference is not called causal uplift;
-- gross authorization movement is not called realized revenue;
-- sandbox execution is not provider, scheme or PCI certification;
-- fraud reduction is not inferred from approval data;
-- no client identity, production metric or result is published without explicit permission.
-
-## Suitable
-
-Multi-market ecommerce, travel, subscription and digital businesses with stable payment identifiers and enough history to inspect acceptance and state behavior.
-
-## Not suitable
-
-Generic CRO design, PCI certification, processor procurement without data, fraud-model outsourcing, or anyone buying a guaranteed “X% revenue lift.”
-
-## Request the audit
-
-Use the structured [Request Audit form](/contact). The public form collects commercial scoping metadata only; production payment data is transferred separately after scope and security expectations are agreed.
-
-[Commercial FAQ](/faq) · [Security & Confidentiality](/security)
+[Security & Confidentiality](/security) · [PFX-1 Research](/research/recoverability-frontier) · [Sample Delivery](/sample-delivery)
