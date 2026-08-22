@@ -143,6 +143,20 @@ Guardrails include fraud, disputes, latency, processing cost, retry count and au
 
 [Open the frozen real-merchant protocol on GitHub →](https://github.com/layan985/eu-payments-acceptance-engine/blob/main/experiments/PFX1_PROTOCOL.md)
 
+## First real-world replication
+
+Checkout is now looking for **one launch merchant or payments platform** willing to test PFX-1 on real randomized traffic.
+
+The ideal partner has meaningful card volume plus at least two feasible rescue actions — for example multi-acquirer routing, 3DS control, network-token capability or a compliant retry path. The protocol can begin with a narrow issuer / market slice rather than the full payment stack.
+
+The research question is fixed in advance. The primary policy is frozen before validation. Fraud, dispute, processing-cost and customer-friction guardrails remain part of the result, not footnotes added afterwards.
+
+The public output can remain **fully anonymized**. No merchant identity, confidential rate, processor contract or proprietary transaction data needs to be published. What matters is whether the causal result survives production.
+
+**For a first replication, use the audit inquiry and write `PFX-1 replication` in the decision field.**
+
+[Discuss a PFX-1 replication →](/contact)
+
 ## Reproduce it
 
 - [Benchmark code](https://github.com/layan985/eu-payments-acceptance-engine/blob/main/experiments/pfx1_recoverability_frontier.py)
