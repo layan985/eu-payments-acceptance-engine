@@ -1,0 +1,45 @@
+name: Patch PFX-1 live route
+
+on:
+  push:
+    paths:
+      - '.github/workflows/patch-pfx1-live.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch Checkout SPA
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text()
+          replacements = {
+              "const RAW='/site_content/';": "const RAW='https://raw.githubusercontent.com/layan985/eu-payments-acceptance-engine/main/site_content/';",
+              "'research/payment-state-integrity':'research-payment-state-integrity.md',": "'research/payment-state-integrity':'research-payment-state-integrity.md','research/recoverability-frontier':'research-recoverability-frontier.md',",
+              "research:['RESEARCH','Three full public technical notes','Method, results, limitations and reproduction are kept on-page.'],": "research:['RESEARCH','Four full public technical notes','Method, results, limitations and reproduction are kept on-page.'],",
+              "'research/payment-state-integrity':['REPORT 003','Payment State Integrity','Duplicate events, lifecycle identity and reconciliation-safe counting.'],": "'research/payment-state-integrity':['REPORT 003','Payment State Integrity','Duplicate events, lifecycle identity and reconciliation-safe counting.'],'research/recoverability-frontier':['REPORT 004 / PFX-1','Decline codes are not failure types','Recoverability Frontier: randomized rescue policy learning for payment failures.'],",
+              "Updated · 17 Aug 2026": "Updated · 22 Aug 2026",
+              "<strong>Rule:</strong> observed processor gaps do not become causal uplift without identification.": "<strong>Rule:</strong> decline reasons do not become recovery prescriptions without randomized evidence.",
+              "Find the lost value. <em>Separate signal from causality.</em> Leave the buyer with a decision they can defend.": "A decline code describes the failure. <em>The experiment asks what would have changed it.</em>",
+              ".research-cards{display:grid;grid-template-columns:repeat(3,1fr);": ".research-cards{display:grid;grid-template-columns:repeat(2,1fr);",
+          }
+          for old, new in replacements.items():
+              if old not in s:
+                  raise SystemExit(f'Missing expected index fragment: {old[:90]}')
+              s = s.replace(old, new, 1)
+          p.write_text(s)
+          PY
+      - name: Commit patch
+        run: |
+          git config user.name "checkout-research-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Route PFX-1 Recoverability Frontier live"
+          git push
